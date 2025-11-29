@@ -1,0 +1,142 @@
+@baseUrl = http://127.0.0.1:8000/api
+
+### 
+// A. (OPCIONAL) REGISTRO DE USUARIO DE PRUEBA
+// Nota: /autenticacion/registrar no está definida en routes/api.php.
+// Si no existe, ejecutar el seeder Database\Seeders\RolesSeeder.
+// ---------------------------------------------------
+# @name registrarPrueba
+POST {{baseUrl}}/autenticacion/registrar
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Usuario Prueba2",
+    "email": "prueba2@test.com",
+    "password": "secret123",
+    "password_confirmation": "secret123"
+}
+
+### 
+// B. LOGIN DEL USUARIO DE PRUEBA (obtener token)
+// ---------------------------------------------------
+// @name loginPrueba
+POST {{baseUrl}}/autenticacion/iniciar-sesion
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "prueba2@test.com",
+    "password": "secret123"
+}
+
+
+# Guardar token desde la respuesta (AuthController devuelve data.token)
+@authTokenPrueba = {{loginPrueba.response.body.data.token}}
+###
+
+# C. VERIFICAR PERFIL (usar token obtenido)
+# Ruta protegida: GET /autenticacion/perfil (middleware auth:sanctum)
+#---------------------------------------------------
+# @name perfilPrueba
+GET {{baseUrl}}/autenticacion/perfil
+Authorization: Bearer {{authTokenPrueba}}
+Accept: application/json
+
+### 
+
+# 1. LOGIN COMO ADMINISTRADOR (usuarios creados por RolesSeeder)
+# ---------------------------------------------------
+# @name loginAdmin
+POST {{baseUrl}}/autenticacion/iniciar-sesion
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "admin@test.com",
+    "password": "12345678"
+}
+
+# Guardar token desde la respuesta (AuthController devuelve data.token)
+@authTokenAdmin = {{loginAdmin.response.body.data.token}}
+
+###
+
+# 2. PRUEBA DE ACCESO ADMIN (Debe retornar 200 OK)
+# Ruta según routes/api.php: GET /admin/dashboard
+# ---------------------------------------------------
+GET {{baseUrl}}/admin/dashboard
+Authorization: Bearer {{authTokenAdmin}}
+Accept: application/json
+
+### 
+
+# 3. LOGIN COMO TÉCNICO
+# ---------------------------------------------------
+# @name loginTecnico
+POST {{baseUrl}}/autenticacion/iniciar-sesion
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "tecnico@test.com",
+    "password": "12345678"
+}
+
+@authTokenTecnico = {{loginTecnico.response.body.data.token}}
+
+### 
+
+# 4. TÉCNICO INTENTA ENTRAR A RUTA DE ADMIN (Debe fallar -> 403)
+# ---------------------------------------------------
+GET {{baseUrl}}/admin/dashboard
+Authorization: Bearer {{authTokenTecnico}}
+Accept: application/json
+
+#
+
+# 5. TÉCNICO ENTRA A ZONA TÉCNICA (Debe funcionar -> 200)
+# Ruta según routes/api.php: GET /tecnica/ordenes-trabajo
+# ---------------------------------------------------
+GET {{baseUrl}}/tecnica/ordenes-trabajo
+Authorization: Bearer {{authTokenTecnico}}
+Accept: application/json
+
+### 
+
+# 6. LOGIN COMO REPORTER
+# ---------------------------------------------------
+# @name loginReporter
+POST {{baseUrl}}/autenticacion/iniciar-sesion
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "reporter@test.com",
+    "password": "12345678"
+}
+
+@authTokenReporter = {{loginReporter.response.body.data.token}}
+
+### 
+
+# 7. REPORTER INTENTA VER ZONA TÉCNICA (Debe fallar -> 403)
+# ---------------------------------------------------
+GET {{baseUrl}}/tecnica/ordenes-trabajo
+Authorization: Bearer {{authTokenReporter}}
+Accept: application/json
+
+### 
+
+# 8. PRUEBAS ADICIONALES (Rutas según routes/api.php)
+# - Supervisión: /supervision/auditoria (supervisor|admin)
+# - Reportes: /reportes/mensuales (reporter|admin)
+# ---------------------------------------------------
+GET {{baseUrl}}/supervision/auditoria
+Authorization: Bearer {{authTokenAdmin}}
+Accept: application/json
+
+###
+GET {{baseUrl}}/reportes/mensuales
+Authorization: Bearer {{authTokenReporter}}
+Accept: application/json

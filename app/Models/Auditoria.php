@@ -8,7 +8,6 @@ use App\Models\User;
 
 class Auditoria extends Model
 {
-
     
     protected $fillable = [
         'usuario_id',

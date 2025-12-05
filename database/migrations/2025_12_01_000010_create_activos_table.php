@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\EstadoActivo;
 
 return new class extends Migration
 {
@@ -14,8 +15,7 @@ return new class extends Migration
         Schema::create('activos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('articulo_id')->constrained('articulos');
-            $table->enum('estado', ['operativo', 'mantenimiento', 'fuera_servicio', 'baja'])
-                ->default('operativo');
+            $table->string('estado')->default(EstadoActivo::OPERATIVO->value);
             $table->foreignId('ubicacion_id')->constrained('ubicaciones');
             $table->float('valor')->nullable();
             $table->timestamps();

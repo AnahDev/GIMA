@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\EstadoActivo; 
+use App\Models\Articulos;
+use App\Models\Ubicacion;
 
 class Activo extends Model
 {
@@ -27,12 +29,12 @@ class Activo extends Model
 
     public function articulo()
     {
-        return $this->belongsTo(Articulo::class);
+        return $this->belongsTo(Articulos::class, 'articulo_id');
     }
 
     public function ubicacion()
     {
-        return $this->belongsTo(Ubicacion::class);
+        return $this->belongsTo('App\\Models\\Ubicacion', 'ubicacion_id');
     }
 
     public function calendarioMantenimientos()

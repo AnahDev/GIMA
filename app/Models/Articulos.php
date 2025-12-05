@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\TipoArticulo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\MaterialArticulos;
+use App\Models\Activo;
 
 class Articulos extends Model
 {
@@ -26,8 +27,11 @@ class Articulos extends Model
 
     public function materiales(): HasMany
     {
-        return $this->hasMany(MaterialArticulos::class);
+        return $this->hasMany(MaterialArticulos::class, 'articulo_id');
     }
 
-
+    public function activos(): HasMany
+    {
+        return $this->hasMany(Activo::class, 'articulo_id');
+    }
 }

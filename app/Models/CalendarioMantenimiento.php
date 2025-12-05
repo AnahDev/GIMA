@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 // Importar Enums 
 use App\Enums\EstadoMantenimiento;
 use App\Enums\TipoMantenimiento;
+use App\Models\Activo;
+use App\Models\User;
 
 class CalendarioMantenimiento extends Model
 {
@@ -32,7 +34,7 @@ class CalendarioMantenimiento extends Model
 
     public function activo()
     {
-        return $this->belongsTo(Activo::class);
+        return $this->belongsTo(Activo::class, 'activo_id');
     }
 
     /**

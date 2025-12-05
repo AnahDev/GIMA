@@ -28,20 +28,20 @@ class SesionesMantenimiento extends Model
     //Una sesion de mantenimiento pertenece a un reporte de mantenimiento
     public function reporte(){
 
-        return $this->belongsTo(Mantenimientos::class, 'reporte_mantenimiento_id');
+        return $this->belongsTo(ReporteMantenimiento::class, 'reporte_id');
 
     }
 
     //Una sesion de mantenimiento puede tener muchos repuestos usados
     public function respuestosUsados(){
 
-        return $this->hasMany(respuestosUsados::class, 'sesion_mantenimiento_id');
+        return $this->hasMany(RepuestoUsado::class, 'sesion_id');
 
     }
 
     public function tecnico(){
 
-        return $this->belongsTo(Tecnico::class, 'tecnico_id');
+        return $this->belongsTo(User::class, 'tecnico_id');
 
     }
 }

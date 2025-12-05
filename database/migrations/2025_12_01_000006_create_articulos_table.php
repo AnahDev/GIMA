@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TipoArticulo;
 
 return new class extends Migration
 {
@@ -13,7 +14,7 @@ return new class extends Migration
 {
     Schema::create('articulos', function (Blueprint $table) {
         $table->id();
-        $table->enum('tipo', ['mobiliario', 'equipo']);
+        $table->string('tipo')->default(TipoArticulo::EQUIPO->value)->nullable(false);
         $table->string('marca')->nullable();
         $table->string('modelo')->nullable();
         $table->text('descripcion')->nullable();

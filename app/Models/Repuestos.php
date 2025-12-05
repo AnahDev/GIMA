@@ -10,7 +10,7 @@ class Repuestos extends Model
 {
     use HasFactory;
     protected $table = 'repuestos';
-    protected $fillables = [
+    protected $fillable = [
         'descripcion',
         'codigo',
         'stock',
@@ -30,13 +30,13 @@ class Repuestos extends Model
     //Relación con el modelo Proveedor
     public function proveedor(): BelongsTo
     {
-        return $this->belongsTo(Proveedores::class);
+        return $this->belongsTo('App\\Models\\Proveedor', 'proveedor_id');
     }
 
     
     //Relación con el modelo Direccion
     public function direccion(): BelongsTo
     {
-        return $this->belongsTo(Direcciones::class);
+        return $this->belongsTo('App\\Models\\Direccion', 'direccion_id');
     }
 }

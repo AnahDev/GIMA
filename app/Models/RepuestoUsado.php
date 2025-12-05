@@ -13,7 +13,6 @@ class RepuestoUsado extends Model
     protected $table = 'repuestos_usados';
 
     protected $fillable = [
-        'id',
         'sesion_id',
         'repuesto_id',
         'cantidad',
@@ -25,13 +24,13 @@ class RepuestoUsado extends Model
     //Un repuesto usado pertenece a una sesion de mantenimiento
     public function sesion(){
 
-        return $this->belongsTo(SesionesMantenimiento::class, 'sesion_mantenimiento_id');
+        return $this->belongsTo(SesionesMantenimiento::class, 'sesion_id');
 
     }    
 
     public function repuesto(){
 
-        return $this->belongsTo(Repuesto::class, 'repuesto_id');
+        return $this->belongsTo(Repuestos::class, 'repuesto_id');
 
     }
 }

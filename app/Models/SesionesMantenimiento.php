@@ -10,10 +10,9 @@ class SesionesMantenimiento extends Model
 {
     use HasFactory;
 
-    #protected $table = 'sesiones_mantenimiento';
+    protected $table = 'sesiones_mantenimiento';
 
     protected $fillable = [
-
         'id',
         'mantenimiento_id',
         'tecnico_id',

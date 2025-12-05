@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Articulos extends Model
 {
     use HasFactory;  
-    #protected $table = 'articulos'; nombre de la tabla
+    protected $table = 'articulos'; 
 
     protected $fillable = [
         'tipo',

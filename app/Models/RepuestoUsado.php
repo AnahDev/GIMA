@@ -10,7 +10,7 @@ class RepuestoUsado extends Model
 {
     use HasFactory;
 
-    #protected $table = 'repuestos_usados';
+    protected $table = 'repuestos_usados';
 
     protected $fillable = [
         'id',

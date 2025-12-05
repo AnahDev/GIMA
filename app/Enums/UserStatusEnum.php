@@ -14,7 +14,8 @@ enum UserStatusEnum: string
     case SUSPENDIDO = 'suspendido';
 
     // Etiquetas legibles para cada estado
-    public function label(): string{
+    public function label(): string
+    {
         return match($this) {
             self::ACTIVO => 'Activo',
             self::INACTIVO => 'Inactivo',

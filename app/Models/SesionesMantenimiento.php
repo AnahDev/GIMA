@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SesionesMantenimiento extends Model
 {
@@ -13,7 +14,6 @@ class SesionesMantenimiento extends Model
     protected $table = 'sesiones_mantenimiento';
 
     protected $fillable = [
-        'id',
         'mantenimiento_id',
         'tecnico_id',
         'fecha',
@@ -21,27 +21,29 @@ class SesionesMantenimiento extends Model
         'observaciones',
         'descripcion_trabajo',
         'costo_hora',
-        'created_at',
-        'updated_at'
     ];
 
-    //Una sesion de mantenimiento pertenece a un reporte de mantenimiento
-    public function reporte(){
 
-        return $this->belongsTo(ReporteMantenimiento::class, 'reporte_id');
+    protected $casts = [
+        'fecha' => 'datetime',
+        'horas_trabajadas' => 'decimal:2',
+        'costo_hora' => 'decimal:2',
+    ];
 
-    }
-
-    //Una sesion de mantenimiento puede tener muchos repuestos usados
-    public function respuestosUsados(){
-
+    //Relación con el modelo RepuestoUsado
+    public function repuestosUtilizados() : HasMany
+    {
         return $this->hasMany(RepuestoUsado::class, 'sesion_id');
-
     }
 
-    public function tecnico(){
-
+    //Relación inversa con el modelo Mantenimiento
+    public function mantenimiento(): BelongsTo
+    {
+        return $this->belongsTo(Mantenimiento::class, 'mantenimiento_id');
+    }
+    //Relación inversa con el modelo Usuario (tecnico)
+    public function tecnico(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'tecnico_id');
-
     }
 }

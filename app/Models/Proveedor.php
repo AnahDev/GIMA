@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Repuesto;
 
 class Proveedor extends Model
 {
-    // 
-
-     use HasFactory;
-
     protected $table = 'proveedores';
 
     protected $fillable = [
@@ -19,13 +17,9 @@ class Proveedor extends Model
         'email'
     ]; 
 
-    // Relaciones: 
-
-     
+    //Relación con el modelo Repuesto
     public function repuestos(): HasMany 
     {
- 
-        return $this->hasMany(Repuestos::class, 'proveedor_id');
-        
+        return $this->hasMany(Repuesto::class, 'proveedor_id');
     }
 }

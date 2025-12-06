@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Mantenimientos; //Franklin
+use App\Models\Mantenimiento; 
+use App\Models\Reporte; 
 
 class ReporteMantenimiento extends Model
 {
@@ -15,9 +16,15 @@ class ReporteMantenimiento extends Model
         'reporte_id'
     ];
 
-    //Un reporte de mantenimiento pertenece a un equipo
-    public function equipo()
+    //Un reporte de mantenimiento pertenece a un mantenimiento
+    public function mantenimiento() : BelongsTo
     {
-        return $this->belongsTo('App\\Models\\Mantenimiento'::class, 'id'); //Franklin
+        return $this->belongsTo(Mantenimiento::class, 'mantenimiento_id');
     }
+    //Un reporte de mantenimiento pertenece a un reporte
+    public function reporte() : BelongsTo
+    {
+        return $this->belongsTo(Reporte::class, 'reporte_id'); 
+    }
+
 }

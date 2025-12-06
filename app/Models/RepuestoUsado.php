@@ -17,20 +17,17 @@ class RepuestoUsado extends Model
         'repuesto_id',
         'cantidad',
         'costo_total',
-        'created_at',
-        'updated_at'
     ];
 
-    //Un repuesto usado pertenece a una sesion de mantenimiento
-    public function sesion(){
-
+    //Relacion inversa con el modelo SesionesMantenimiento
+    public function sesion(): BelongsTo
+    {
         return $this->belongsTo(SesionesMantenimiento::class, 'sesion_id');
+    }
 
-    }    
-
-    public function repuesto(){
-
-        return $this->belongsTo(Repuestos::class, 'repuesto_id');
-
+    //Relacion inversa con el modelo Repuesto
+    public function repuesto(): BelongsTo
+    {
+        return $this->belongsTo(Repuesto::class, 'repuesto_id');
     }
 }

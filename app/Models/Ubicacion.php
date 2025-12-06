@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Activo;
 
 class Ubicacion extends Model
 {
-    // 
-
-    use HasFactory;
 
     protected $table = 'ubicaciones';
 
@@ -18,13 +18,16 @@ class Ubicacion extends Model
         'salon'
     ]; 
 
-    // Relaciones: 
+    //Relación inversa con el direccion
+    public function direccion() : BelongsTo
+    {
+        return $this->belongsTo(Direccion::class, 'direccion_id');
+    }
 
-     
+    //Relación con el modelo Activo
     public function activos(): HasMany 
     {
- 
-        return $this->hasMany(Activos::class, 'ubicacion_id');
+        return $this->hasMany(Activo::class, 'ubicacion_id');
         
     }
 

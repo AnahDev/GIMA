@@ -17,14 +17,14 @@ return new class extends Migration
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activo_id')->constrained('activos');
+            $table->foreignId('supervisor_id')->constrained('users');
+            $table->foreignId('tecnico_principal_id')->constrained('users');
             $table->string('tipo')->default(TipoMantenimiento::PREVENTIVO->value)
                 ->isNotEmpty();
             $table->dateTime('fecha_apertura');
             $table->dateTime('fecha_cierre');
             $table->string('estado')->default(EstadoMantenimiento::PENDIENTE->value);
             $table->string('descripcion');
-            $table->foreignId('supervisor_id')->constrained('users');
-            $table->foreignId('tecnico_principal_id')->constrained('users');
             $table->boolean('validado');
             $table->float(' costo_total');
             $table->timestamps();

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\EstadoActivo; 
 use App\Models\Articulos;
-use App\Models\Ubicacion;
+use App\Models\Ubicacion; //Eduardo
 
 class Activo extends Model
 {
@@ -34,7 +34,7 @@ class Activo extends Model
 
     public function ubicacion()
     {
-        return $this->belongsTo('App\\Models\\Ubicacion', 'ubicacion_id');
+        return $this->belongsTo('App\\Models\\Ubicacion', 'ubicacion_id'); //eduardo
     }
 
     public function calendarioMantenimientos()

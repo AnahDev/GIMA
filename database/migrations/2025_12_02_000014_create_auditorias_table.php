@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('auditorias', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->string('entidad')->nullable(false);
             $table->bigInteger('entidad_id')->unsigned();

@@ -3,6 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Ubicacion;
+use App\Models\Repuestos;
+
 
 class Direccion extends Model
 {
@@ -13,26 +18,24 @@ class Direccion extends Model
 
     protected $fillable = [
         'estado',
-        'ciudad', 
-        'sector', 
-        'calle', 
+        'ciudad',
+        'sector',
+        'calle',
         'sede'
-    ]; 
+    ];
 
     // Relaciones: 
 
-    
-    public function ubicaciones(): HasMany 
+
+    public function ubicaciones(): HasMany
     {
- 
+
         return $this->hasMany(Ubicacion::class, 'direccion_id');
-        
     }
 
-     public function repuestos(): HasMany 
+    public function repuestos(): HasMany
     {
- 
-        return $this->hasMany(Repuesto::class, 'direccion_id');
-        
+
+        return $this->hasMany(Repuestos::class, 'direccion_id');
     }
 }

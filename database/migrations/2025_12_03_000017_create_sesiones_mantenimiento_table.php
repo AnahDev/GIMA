@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('sesiones_mantenimiento', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mantenimiento_id')->constrained('mantenimientos')
-                ->onDelete('cascade');
-            $table->foreignId('tecnico_id')->constrained('users');
+            $table->foreignId('mantenimiento_id')->constrained('mantenimientos')->onDelete('cascade');
+            $table->foreignId('tecnico_id')->constrained('users')->onDelete('cascade');
             $table->datetime('fecha')->nullable();
             $table->float('horas_trabajadas')->nullable();
             $table->string('observaciones')->nullable();

@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-  public function up()
-{
-    Schema::create('ubicaciones', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('direccion_id')->constrained('direcciones');
-        $table->string('edificio')->nullable();
-        $table->string('piso')->nullable();
-        $table->string('salon')->nullable();
-        $table->timestamps();
-    });
-}
+    public function up()
+    {
+        Schema::create('ubicaciones', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('direccion_id')->constrained('direcciones')->onDelete('cascade');
+            $table->string('edificio')->nullable();
+            $table->string('piso')->nullable();
+            $table->string('salon')->nullable();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

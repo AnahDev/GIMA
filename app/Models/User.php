@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Enums\UserStatusEnum;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -52,5 +53,47 @@ class User extends Authenticatable
             'password' => 'hashed',
             'estado' => UserStatusEnum::class,
         ];
+    }
+
+    //Relación con el modelo SesionesMantenimiento
+    public function sesionesMantenimiento() : HasMany
+    {
+        return $this->hasMany(SesionesMantenimiento::class, 'tecnico_id');
+    }
+
+    //Relación con el modelo Auditorias
+    public function auditorias() : HasMany
+    {
+        return $this->hasMany(Auditoria::class, 'usuario_id');
+    }
+
+    //Relación con el modelo Notificaciones
+    public function notificaciones() : HasMany
+    {
+        return $this->hasMany(Notificacion::class, 'usuario_id');
+    }
+    
+    //Relación con el modelo CalendarioMantenimiento
+    public function calendarioMantenimientos() : HasMany
+    {
+        return $this->hasMany(CalendarioMantenimiento::class, 'tecnico_asignado_id');
+    }
+
+    //Relación con el modelo Reporte
+    public function reportes() : HasMany
+    {
+        return $this->hasMany(Reporte::class, 'usuario_id');
+    }
+
+    //Relación con el modelo Mantenimiento como supervisor
+    public function mantenimientosSupervisados() : HasMany
+    {
+        return $this->hasMany(Mantenimiento::class, 'supervisor_id');
+    }
+
+    //Relación con el modelo Mantenimiento como tecnico principal
+    public function mantenimientosTecnicoPrincipal() : HasMany
+    {
+        return $this->hasMany(Mantenimiento::class, 'tecnico_principal_id');
     }
 }

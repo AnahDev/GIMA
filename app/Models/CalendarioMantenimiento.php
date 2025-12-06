@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 // Importar Enums 
 use App\Enums\EstadoMantenimiento;
 use App\Enums\TipoMantenimiento;
@@ -14,13 +15,14 @@ class CalendarioMantenimiento extends Model
 {
     use HasFactory;
 
+    protected $table = 'calendario_mantenimientos';
     protected $fillable = [
         'activo_id',
         'tecnico_asignado_id',    
-        'tipo',                   // (Enum)
+        'tipo',                   
         'fecha_programada',
         'descripcion',            
-        'estado',                // (Enum)
+        'estado',                
     ];
 
     /**
@@ -32,15 +34,14 @@ class CalendarioMantenimiento extends Model
         'estado' => EstadoMantenimiento::class,   
     ];
 
-    public function activo()
+    //Relacion inversa con el modelo Activo
+    public function activo(): BelongsTo
     {
         return $this->belongsTo(Activo::class, 'activo_id');
     }
 
-    /**
-     * Relación con el técnico (User)
-     */
-    public function tecnicoAsignado()
+    //relación inversa con el modelo User como técnico asignado
+    public function tecnicoAsignado(): BelongsTo
     {
         return $this->belongsTo(User::class, 'tecnico_asignado_id');
     }

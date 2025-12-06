@@ -4,40 +4,66 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Activo;
+use App\Models\User;
+use App\Models\Reporte;
 
 class Mantenimiento extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $table = 'mantenimientos';
 
-    public function activo()
+    protected $fillable = [
+        'activo_id',
+        'supervisor_id',
+        'tecnico_principal_id',
+        'tipo',
+        'fecha_apertura',
+        'fecha_cierre',
+        'estado',
+        'descripcion',
+        'validado',
+        'costo_total',
+    ];
+
+    protected $casts = [
+        'estado' => 'string',
+        'tipo' => 'string',
+        'fecha_apertura' => 'datetime',
+        'fecha_cierre' => 'datetime',
+        'validado' => 'boolean',
+        'costo_total' => 'decimal:2',
+    ];
+
+    public function activo(): BelongsTo
     {
         return $this->belongsTo(Activo::class);
     }
 
-    public function supervisor()
+    //Relación inversa con el modelo User como supervisor
+    public function supervisor() : BelongsTo
     {
         return $this->belongsTo(User::class, 'supervisor_id');
     }
 
-    public function tecnicoPrincipal()
+    //Relación inversa con el modelo User como técnico principal
+    public function tecnicoPrincipal() : BelongsTo
     {
         return $this->belongsTo(User::class, 'tecnico_principal_id');
     }
 
-    public function sesiones()
+    //Relación con el modelo SesionesMantenimiento
+    public function sesiones() : HasMany
     {
-        return $this->hasMany(SesionMantenimiento::class);
+        return $this->hasMany(SesionesMantenimiento::class);
     }
 
-    public function reportes()
+    //Relación con el modelo ReporteMantenimiento
+    public function reporteMantenimientos() : HasMany
     {
-        return $this->belongsToMany(
-            Reporte::class,
-            'reportes_mantenimiento',
-            'mantenimiento_id',
-            'reporte_id'
-        )->withTimestamps();
+        return $this->hasMany(ReporteMantenimiento::class, 'mantenimiento_id');
     }
 }

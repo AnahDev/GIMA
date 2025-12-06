@@ -26,7 +26,7 @@ class MaterialArticulos extends Model
         'fecha_subida' => 'datetime',
     ];
 
-    //Relación con el modelo Articulo
+    //Relación inversa con el modelo Articulo
     public function articulo(): BelongsTo
     {
         return $this->belongsTo(Articulos::class, 'articulo_id');

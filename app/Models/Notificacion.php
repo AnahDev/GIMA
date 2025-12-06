@@ -8,22 +8,17 @@ use App\Models\User;
 
 class Notificacion extends Model
 {
+    protected $table = 'notificaciones';
+
     protected $fillable = [
         'usuario_id',
         'contenido',
     ];
     
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
-    public function usuario(): BelongsTo{
+    //Relación inversa con el modelo Usuario 
+    public function usuario(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'usuario_id');
     }
 }

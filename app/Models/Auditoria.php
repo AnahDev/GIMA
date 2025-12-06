@@ -9,6 +9,8 @@ use App\Models\User;
 class Auditoria extends Model
 {
     
+    protected $table = 'auditorias';
+
     protected $fillable = [
         'usuario_id',
         'entidad',
@@ -18,18 +20,13 @@ class Auditoria extends Model
         'fecha',
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $casts = [
         'fecha' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
     
-    public function usuario(): BelongsTo{
+    //Relación inversa con el modelo Usuario 
+    public function usuario(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'usuario_id');
     }
 

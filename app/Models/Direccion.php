@@ -13,11 +13,11 @@ class Direccion extends Model
 
     protected $fillable = [
         'estado',
-        'ciudad', 
-        'sector', 
-        'calle', 
+        'ciudad',
+        'sector',
+        'calle',
         'sede'
-    ]; 
+    ];
 
     
    //Relación con el modelo Ubicacion

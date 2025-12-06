@@ -30,13 +30,13 @@ class Repuestos extends Model
     //Relación con el modelo Proveedor
     public function proveedor(): BelongsTo
     {
-        return $this->belongsTo('App\\Models\\Proveedor', 'proveedor_id');
+        return $this->belongsTo('App\\Models\\Proveedor', 'proveedor_id'); //Eduardo
     }
 
     
     //Relación con el modelo Direccion
     public function direccion(): BelongsTo
     {
-        return $this->belongsTo('App\\Models\\Direccion', 'direccion_id');
+        return $this->belongsTo('App\\Models\\Direccion', 'direccion_id'); //Eduardo
     }
 }

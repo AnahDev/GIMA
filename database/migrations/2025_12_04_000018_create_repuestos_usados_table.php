@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reportes_mantenimiento', function (Blueprint $table) {
+        Schema::create('repuestos_usados', function (Blueprint $table) {
             $table->id();
-            $table->mantenimiento_id()->foreignId()->constrained('mantenimientos');
-            $table->reporte_id()->foreignId()->constrained('reportes');
+            $table->foreignId('sesion_id')->constrained('sesiones_mantenimiento')
+                ->onDelete('cascade');
+            $table->foreignId('repuestos_id')->constrained('repuestos');
+            $table->float('cantidad')->nullable();
+            $table->float('costo_total')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reportes_mantenimiento');
+        Schema::dropIfExists('repuestos_usados');
     }
 };

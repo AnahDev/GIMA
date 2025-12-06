@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('notificacions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            ///
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->string('contenido');
             $table->timestamps();

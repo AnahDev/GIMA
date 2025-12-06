@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('auditorias', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            ///
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
-            $table->string('entidad');
+            $table->string('entidad')->nullable(false);
             $table->bigInteger('entidad_id')->unsigned();
             $table->string('accion');
             $table->string('descripcion')->nullable();

@@ -28,8 +28,8 @@ class CalendarioMantenimiento extends Model
      */
     protected $casts = [
         'fecha_programada' => 'datetime',
-        'tipo' => TipoMantenimiento::class,       // O 'string'
-        'estado' => EstadoMantenimiento::class,   // O 'string'
+        'tipo' => TipoMantenimiento::class,       
+        'estado' => EstadoMantenimiento::class,   
     ];
 
     public function activo()

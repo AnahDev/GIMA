@@ -21,6 +21,7 @@ class Mantenimiento extends Model
         'supervisor_id',
         'tecnico_principal_id',
         'tipo',
+        'reporte_id',
         'fecha_apertura',
         'fecha_cierre',
         'estado',
@@ -60,10 +61,9 @@ class Mantenimiento extends Model
     {
         return $this->hasMany(SesionesMantenimiento::class);
     }
-
-    // Nueva relación directa: Un mantenimiento tiene muchos reportes
-    public function reportes(): HasMany
+    // Relación: Un mantenimiento pertenece a un reporte
+    public function reporte(): BelongsTo
     {
-        return $this->hasMany(Reporte::class);
+        return $this->belongsTo(Reporte::class);
     }
 }

@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignId('tecnico_principal_id')->constrained('users');
             $table->string('tipo')->default(TipoMantenimiento::PREVENTIVO->value)
                 ->isNotEmpty();
+            $table->foreignId('reporte_id')
+                ->nullable() // Nullable es vital: Los mantenimientos preventivos NO tienen reporte
+                ->constrained()
+                ->onDelete('cascade');
             $table->dateTime('fecha_apertura');
             $table->dateTime('fecha_cierre');
             $table->string('estado')->default(EstadoMantenimiento::PENDIENTE->value);

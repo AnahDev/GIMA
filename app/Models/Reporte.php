@@ -13,7 +13,7 @@ use App\Models\ReporteMantenimiento;
 class Reporte extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'reportes';
 
     protected $fillable = [
@@ -42,9 +42,9 @@ class Reporte extends Model
         return $this->belongsTo(Activo::class, 'activo_id');
     }
 
-    //Relación con el modelo ReporteMantenimiento
-    public function reporteMantenimiento(): HasMany
+    //Relación uno a muchos con el modelo Mantenimiento
+    public function mantenimientos(): HasMany
     {
-        return $this->hasMany(ReporteMantenimiento::class, 'reporte_id');
+        return $this->hasMany(Mantenimiento::class);
     }
 }

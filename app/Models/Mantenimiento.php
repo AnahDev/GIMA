@@ -44,26 +44,26 @@ class Mantenimiento extends Model
     }
 
     //Relación inversa con el modelo User como supervisor
-    public function supervisor() : BelongsTo
+    public function supervisor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'supervisor_id');
     }
 
     //Relación inversa con el modelo User como técnico principal
-    public function tecnicoPrincipal() : BelongsTo
+    public function tecnicoPrincipal(): BelongsTo
     {
         return $this->belongsTo(User::class, 'tecnico_principal_id');
     }
 
     //Relación con el modelo SesionesMantenimiento
-    public function sesiones() : HasMany
+    public function sesiones(): HasMany
     {
         return $this->hasMany(SesionesMantenimiento::class);
     }
 
-    //Relación con el modelo ReporteMantenimiento
-    public function reporteMantenimientos() : HasMany
+    // Nueva relación directa: Un mantenimiento tiene muchos reportes
+    public function reportes(): HasMany
     {
-        return $this->hasMany(ReporteMantenimiento::class, 'mantenimiento_id');
+        return $this->hasMany(Reporte::class);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\EstadoReporte;
+use App\Enums\NivelPrioridad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,8 +28,8 @@ class Reporte extends Model
 
 
     protected $casts = [
-        'prioridad' => 'string',
-        'estado' => 'string',
+        'prioridad' => NivelPrioridad::class,
+        'estado' => EstadoReporte::class
     ];
 
     //Relación inversa con el modelo Usuario 
@@ -45,6 +47,6 @@ class Reporte extends Model
     //Relación uno a muchos con el modelo Mantenimiento
     public function mantenimientos(): HasMany
     {
-        return $this->hasMany(Mantenimiento::class);
+        return $this->hasMany(Mantenimiento::class, 'reporte_id');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\EstadoMantenimiento;
+use App\Enums\TipoMantenimiento;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,17 +33,18 @@ class Mantenimiento extends Model
     ];
 
     protected $casts = [
-        'estado' => 'string',
-        'tipo' => 'string',
+        'estado' => EstadoMantenimiento::class,
+        'tipo' => TipoMantenimiento::class,
         'fecha_apertura' => 'datetime',
         'fecha_cierre' => 'datetime',
         'validado' => 'boolean',
         'costo_total' => 'decimal:2',
     ];
 
+    //Relación inversa con el modelo Activo
     public function activo(): BelongsTo
     {
-        return $this->belongsTo(Activo::class);
+        return $this->belongsTo(Activo::class, 'activo_id');
     }
 
     //Relación inversa con el modelo User como supervisor
@@ -59,11 +62,11 @@ class Mantenimiento extends Model
     //Relación con el modelo SesionesMantenimiento
     public function sesiones(): HasMany
     {
-        return $this->hasMany(SesionesMantenimiento::class);
+        return $this->hasMany(SesionesMantenimiento::class, 'mantenimiento_id');
     }
     // Relación: Un mantenimiento pertenece a un reporte
     public function reporte(): BelongsTo
     {
-        return $this->belongsTo(Reporte::class);
+        return $this->belongsTo(Reporte::class, 'reporte_id');
     }
 }

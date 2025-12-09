@@ -62,7 +62,7 @@ class Mantenimiento extends Model
     //Relación con el modelo SesionesMantenimiento
     public function sesiones(): HasMany
     {
-        return $this->hasMany(SesionesMantenimiento::class);
+        return $this->hasMany(SesionesMantenimiento::class, 'mantenimiento_id');
     }
     // Relación: Un mantenimiento pertenece a un reporte
     public function reporte(): BelongsTo

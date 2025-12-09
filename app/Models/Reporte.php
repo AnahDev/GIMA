@@ -47,6 +47,6 @@ class Reporte extends Model
     //Relación uno a muchos con el modelo Mantenimiento
     public function mantenimientos(): HasMany
     {
-        return $this->hasMany(Mantenimiento::class, 'mantenimiento_id');
+        return $this->hasMany(Mantenimiento::class, 'reporte_id');
     }
 }

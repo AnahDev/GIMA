@@ -20,10 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('telefono')->nullable();
             $table->string('estado')->default(UserStatusEnum::ACTIVO->value);
-            $table->foreignId('aprobado_por')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();      // Si borran al supervisor, el campo queda null (no se borra el usuario)
             $table->dateTime('fecha_aprobacion')->nullable();
             $table->rememberToken();
             $table->timestamps();

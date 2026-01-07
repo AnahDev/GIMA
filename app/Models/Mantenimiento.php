@@ -65,7 +65,7 @@ class Mantenimiento extends Model
         return $this->hasMany(SesionesMantenimiento::class, 'mantenimiento_id');
     }
     // Relación: Un mantenimiento pertenece a un reporte
-    p`ublic function reporte(): BelongsTo
+    public function reporte(): BelongsTo
     {
         return $this->belongsTo(Reporte::class, 'reporte_id');
     }

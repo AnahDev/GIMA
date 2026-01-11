@@ -21,7 +21,7 @@ class ArticuloResource extends JsonResource
             'modelo' => $this->modelo,
             'descripcion' => $this->descripcion,
             // Opcional: Mostrar las relaciones si han sido cargadas (Eager Loaded)
-            'materiales' => MaterialArticuloResource::collection($this->whenLoaded('materiales')),
+            //'materiales' => MaterialArticuloResource::collection($this->whenLoaded('materiales')), //descomentar marterialesController hecho
             'activos_count' => $this->whenCounted('activos'), // Útil para conteos
             'created_at' => $this->created_at->toDateTimeString(),
         ];

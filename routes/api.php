@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\DireccionController;
+use App\Http\Controllers\Api\Catalogo\ArticuloController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -26,4 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('direcciones', DireccionController::class)
         ->parameters(['direcciones' => 'direccion']);
+  // Agregamos el prefijo 'catalogo' para ordenar las rutas
+    Route::prefix('catalogo')->group(function () {
+        Route::apiResource('articulos', ArticuloController::class)
+            ->parameters(['articulos' => 'articulo']);
+    });
 });

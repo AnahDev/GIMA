@@ -3,15 +3,15 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Articulos;
+use App\Models\Articulo;
 use App\Enums\TipoArticulo;
 
-class ArticulosSeeder extends Seeder
+class ArticuloSeeder extends Seeder
 {
     public function run(): void
     {
         // 1. Laptop (Es un EQUIPO)
-        Articulos::create([
+        Articulo::create([
             'tipo'        => TipoArticulo::EQUIPO, // Laravel traduce esto a 'equipo' solo
             'marca'       => 'Dell',
             'modelo'      => 'Latitude 5420',
@@ -19,7 +19,7 @@ class ArticulosSeeder extends Seeder
         ]);
 
         // 2. Video Beam (Es un EQUIPO)
-        Articulos::create([
+        Articulo::create([
             'tipo'        => TipoArticulo::EQUIPO,
             'marca'       => 'Epson',
             'modelo'      => 'PowerLite X41',
@@ -27,7 +27,7 @@ class ArticulosSeeder extends Seeder
         ]);
 
         // 3. Silla (Es MOBILIARIO)
-        Articulos::create([
+        Articulo::create([
             'tipo'        => TipoArticulo::MOBILIARIO,
             'marca'       => 'Herman Miller',
             'modelo'      => 'Aeron',

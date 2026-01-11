@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Catalogo;
 
 use App\Http\Controllers\Controller;
-use App\Models\Articulos;
+use App\Models\Articulo;
 use Illuminate\Http\Request;
 use App\Http\Resources\ArticuloResource;
 
@@ -14,7 +14,7 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulos::withCount('activos')->paginate(15);
+        $articulos = Articulo::withCount('activos')->paginate(15);
         return ArticuloResource::collection($articulos);
     }
 
@@ -32,7 +32,7 @@ class ArticuloController extends Controller
         ]);
 
         // Usamos esa variable para crear
-        $articulo = Articulos::create($datosValidados);
+        $articulo = Articulo::create($datosValidados);
 
         return new ArticuloResource($articulo);
     }
@@ -40,7 +40,7 @@ class ArticuloController extends Controller
     /**
      * GET /api/catalogo/articulos/{id}
      */
-    public function show(Articulos $articulo)
+    public function show(Articulo $articulo)
     {
         return new ArticuloResource($articulo);
     }
@@ -48,7 +48,7 @@ class ArticuloController extends Controller
     /**
      * PUT/PATCH /api/catalogo/articulos/{id}
      */
-    public function update(Request $request, Articulos $articulo)
+    public function update(Request $request, Articulo $articulo)
     {
         //validamos los datos entrantes
         $datosValidados = $request->validate([
@@ -66,7 +66,7 @@ class ArticuloController extends Controller
     /**
      * DELETE /api/catalogo/articulos/{id}
      */
-    public function destroy(Articulos $articulo)
+    public function destroy(Articulo $articulo)
     {
         // Verificamos si tiene hijos
         if ($articulo->activos()->exists()) {

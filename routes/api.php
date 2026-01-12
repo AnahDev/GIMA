@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\DireccionController;
 use App\Http\Controllers\Api\Catalogo\ArticuloController;
+use App\Http\Controllers\Api\Catalogo\ActivoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -31,5 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('catalogo')->group(function () {
         Route::apiResource('articulos', ArticuloController::class)
             ->parameters(['articulos' => 'articulo']);
+
+            // Rutas para Activos
+        Route::apiResource('activos', ActivoController::class)
+            ->parameters(['activos' => 'activo']);
     });
 });

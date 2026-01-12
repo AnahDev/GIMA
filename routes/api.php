@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\DireccionController;
 use App\Http\Controllers\Api\Catalogo\ArticuloController;
+use App\Http\Controllers\Api\Catalogo\MaterialArticuloController;
+use App\Http\Controllers\Api\General\NotificacionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -31,12 +33,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('catalogo')->group(function () {
         Route::apiResource('articulos', ArticuloController::class)
             ->parameters(['articulos' => 'articulo']);
+            Route::apiResource('materiales-articulo',MaterialArticuloController::class)
+        ->parameters(['materiales-articulo' => 'materiales_articulo']);
     });
     
     Route::prefix('general')->group(function () {
     
     // Esto crea las rutas: /api/general/notificaciones
-    Route::apiResource('notificaciones', \App\Http\Controllers\Api\General\NotificacionController::class)
+    Route::apiResource('notificaciones', NotificacionController::class)
         ->parameters(['notificaciones' => 'notificacion']);
         
 });

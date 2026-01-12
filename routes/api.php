@@ -5,12 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\DireccionController;
 use App\Http\Controllers\Api\Catalogo\ArticuloController;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\Catalogo\ActivoController;
-=======
 use App\Http\Controllers\Api\Catalogo\MaterialArticuloController;
 use App\Http\Controllers\Api\General\NotificacionController;
->>>>>>> 2b5c9931f55e8887b9339e5481019d292db271d4
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -37,15 +34,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('catalogo')->group(function () {
         Route::apiResource('articulos', ArticuloController::class)
             ->parameters(['articulos' => 'articulo']);
-<<<<<<< HEAD
 
             // Rutas para Activos
         Route::apiResource('activos', ActivoController::class)
             ->parameters(['activos' => 'activo']);
-=======
-            Route::apiResource('materiales-articulo',MaterialArticuloController::class)
+            
+            // Rutas para MaterialArticulo
+        Route::apiResource('materiales-articulo',MaterialArticuloController::class)
         ->parameters(['materiales-articulo' => 'materiales_articulo']);
->>>>>>> 2b5c9931f55e8887b9339e5481019d292db271d4
     });
     
     Route::prefix('general')->group(function () {

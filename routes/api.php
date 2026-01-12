@@ -32,4 +32,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('articulos', ArticuloController::class)
             ->parameters(['articulos' => 'articulo']);
     });
+    
+    Route::prefix('general')->group(function () {
+    
+    // Esto crea las rutas: /api/general/notificaciones
+    Route::apiResource('notificaciones', \App\Http\Controllers\Api\General\NotificacionController::class)
+        ->parameters(['notificaciones' => 'notificacion']);
+        
+});
+    
 });
